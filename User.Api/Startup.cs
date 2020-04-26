@@ -1,17 +1,20 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
+using Shared.Identity;
+using Shared.Persistence.MySql;
+using User.Application.GetAllUsers;
+using User.Application.Infrastructure;
+using User.Persistence;
 
-namespace User
+namespace User.Api
 {
     public class Startup
     {
@@ -25,6 +28,32 @@ namespace User
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<ISqlRepository<ApplicationUser>, UserRepository>();
+
+            var connectionString = Configuration["ConnectionString"];
+
+            services.AddDbContext<ApplicationDbContext>(options => 
+                options.UseMySql(connectionString, builder =>
+                {
+                    builder.EnableRetryOnFailure(maxRetryCount: 10, maxRetryDelay: TimeSpan.FromSeconds(30),
+                        errorNumbersToAdd: null);
+            }));
+
+            services.AddAutoMapper(typeof(UserProfile).Assembly);
+            services.AddMediatR(typeof(GetAllUsersQuery).Assembly);
+
+            var identityUrl = Configuration["IdentityUrl"];
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo()
+                {
+                    Title = "You api title",
+                    Version = "v1"
+                });
+            });
+
+
             services.AddControllers();
         }
 
@@ -39,6 +68,14 @@ namespace User
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Quiz API V1");
+                c.OAuthClientId("SwaggerId");
+                c.OAuthAppName("Swagger UI");
+            });
 
             app.UseAuthorization();
 

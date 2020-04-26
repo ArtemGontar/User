@@ -1,0 +1,14 @@
+C:\andersendev\Quiz\User\User.Persistence\bin\Debug\netstandard2.0\User.Persistence.deps.json
+C:\andersendev\Quiz\User\User.Persistence\bin\Debug\netstandard2.0\User.Persistence.dll
+C:\andersendev\Quiz\User\User.Persistence\bin\Debug\netstandard2.0\User.Persistence.pdb
+C:\andersendev\Quiz\User\User.Persistence\bin\Debug\netstandard2.0\Shared.Identity.dll
+C:\andersendev\Quiz\User\User.Persistence\bin\Debug\netstandard2.0\Shared.Persistence.MySql.dll
+C:\andersendev\Quiz\User\User.Persistence\bin\Debug\netstandard2.0\Shared.Persistence.MySql.pdb
+C:\andersendev\Quiz\User\User.Persistence\bin\Debug\netstandard2.0\Shared.Identity.pdb
+C:\andersendev\Quiz\User\User.Persistence\obj\Debug\netstandard2.0\User.Persistence.csprojAssemblyReference.cache
+C:\andersendev\Quiz\User\User.Persistence\obj\Debug\netstandard2.0\User.Persistence.csproj.CoreCompileInputs.cache
+C:\andersendev\Quiz\User\User.Persistence\obj\Debug\netstandard2.0\User.Persistence.AssemblyInfoInputs.cache
+C:\andersendev\Quiz\User\User.Persistence\obj\Debug\netstandard2.0\User.Persistence.AssemblyInfo.cs
+C:\andersendev\Quiz\User\User.Persistence\obj\Debug\netstandard2.0\User.Persistence.csproj.CopyComplete
+C:\andersendev\Quiz\User\User.Persistence\obj\Debug\netstandard2.0\User.Persistence.dll
+C:\andersendev\Quiz\User\User.Persistence\obj\Debug\netstandard2.0\User.Persistence.pdb
