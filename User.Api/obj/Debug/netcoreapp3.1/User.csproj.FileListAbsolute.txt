@@ -1,0 +1,10 @@
+C:\andersendev\Quiz\User\User\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\andersendev\Quiz\User\User\bin\Debug\netcoreapp3.1\appsettings.json
+C:\andersendev\Quiz\User\User\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+C:\andersendev\Quiz\User\User\bin\Debug\netcoreapp3.1\User.exe
+C:\andersendev\Quiz\User\User\obj\Debug\netcoreapp3.1\User.csprojAssemblyReference.cache
+C:\andersendev\Quiz\User\User\obj\Debug\netcoreapp3.1\User.AssemblyInfoInputs.cache
+C:\andersendev\Quiz\User\User\obj\Debug\netcoreapp3.1\User.AssemblyInfo.cs
+C:\andersendev\Quiz\User\User\obj\Debug\netcoreapp3.1\User.RazorTargetAssemblyInfo.cache
+C:\andersendev\Quiz\User\User\obj\Debug\netcoreapp3.1\staticwebassets\User.StaticWebAssets.Manifest.cache
+C:\andersendev\Quiz\User\User\obj\Debug\netcoreapp3.1\staticwebassets\User.StaticWebAssets.xml

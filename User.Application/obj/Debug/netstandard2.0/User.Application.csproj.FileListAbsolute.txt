@@ -1,0 +1,5 @@
+C:\andersendev\Quiz\User\User.Application\bin\Debug\netstandard2.0\User.Application.deps.json
+C:\andersendev\Quiz\User\User.Application\bin\Debug\netstandard2.0\User.Application.dll
+C:\andersendev\Quiz\User\User.Application\obj\Debug\netstandard2.0\User.Application.csprojAssemblyReference.cache
+C:\andersendev\Quiz\User\User.Application\obj\Debug\netstandard2.0\User.Application.AssemblyInfoInputs.cache
+C:\andersendev\Quiz\User\User.Application\obj\Debug\netstandard2.0\User.Application.AssemblyInfo.cs
