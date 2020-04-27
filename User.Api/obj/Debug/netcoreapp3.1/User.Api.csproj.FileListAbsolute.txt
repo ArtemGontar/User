@@ -78,3 +78,13 @@ C:\andersendev\Quiz\User\User.Api\bin\Debug\netcoreapp3.1\Scrutor.dll
 C:\andersendev\Quiz\User\User.Api\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Annotations.dll
 C:\andersendev\Quiz\User\User.Api\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Filters.dll
 C:\andersendev\Quiz\User\User.Api\bin\Debug\netcoreapp3.1\User.Persistence.pdb
+C:\andersendev\Quiz\User\User.Api\bin\Debug\netcoreapp3.1\MySqlConnector.dll
+C:\andersendev\Quiz\User\User.Api\bin\Debug\netcoreapp3.1\Pomelo.EntityFrameworkCore.MySql.dll
+C:\andersendev\Quiz\User\User.Api\bin\Debug\netcoreapp3.1\Pomelo.JsonObject.dll
+C:\andersendev\Quiz\User\User.Api\bin\Debug\netcoreapp3.1\Automatonymous.dll
+C:\andersendev\Quiz\User\User.Api\bin\Debug\netcoreapp3.1\GreenPipes.dll
+C:\andersendev\Quiz\User\User.Api\bin\Debug\netcoreapp3.1\MassTransit.dll
+C:\andersendev\Quiz\User\User.Api\bin\Debug\netcoreapp3.1\MassTransit.RabbitMqTransport.dll
+C:\andersendev\Quiz\User\User.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.PlatformAbstractions.dll
+C:\andersendev\Quiz\User\User.Api\bin\Debug\netcoreapp3.1\NewId.dll
+C:\andersendev\Quiz\User\User.Api\bin\Debug\netcoreapp3.1\RabbitMQ.Client.dll

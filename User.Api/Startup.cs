@@ -1,5 +1,7 @@
 using System;
 using AutoMapper;
+using GreenPipes;
+using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,20 +29,41 @@ namespace User.Api
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddScoped<ISqlRepository<ApplicationUser>, UserRepository>();
-
+        { 
             var connectionString = Configuration["ConnectionString"];
 
-            services.AddDbContext<ApplicationDbContext>(options => 
+            services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySql(connectionString, builder =>
                 {
                     builder.EnableRetryOnFailure(maxRetryCount: 10, maxRetryDelay: TimeSpan.FromSeconds(30),
                         errorNumbersToAdd: null);
-            }));
+                }));
+            services.AddScoped<ISqlRepository<ApplicationUser>, UserRepository>();
 
             services.AddAutoMapper(typeof(UserProfile).Assembly);
             services.AddMediatR(typeof(GetAllUsersQuery).Assembly);
+
+            services.AddMassTransit(x =>
+            {
+                //x.AddConsumer<DeleteChapterConsumer>();
+
+                x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
+                {
+                    // configure health checks for this bus instance
+                    cfg.UseHealthCheck(provider);
+
+                    cfg.Host("rabbitmq://localhost");
+
+                    cfg.ReceiveEndpoint("delete-chapter", ep =>
+                    {
+                        ep.PrefetchCount = 16;
+                        ep.UseMessageRetry(r => r.Interval(2, 100));
+
+                        //ep.ConfigureConsumer<DeleteChapterConsumer>(provider);
+                    });
+                }));
+            });
+            services.AddMassTransitHostedService();
 
             var identityUrl = Configuration["IdentityUrl"];
 
