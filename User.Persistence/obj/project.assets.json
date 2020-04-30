@@ -772,31 +772,31 @@
           "lib/netstandard2.0/System.Threading.Tasks.Extensions.dll": {}
         }
       },
-      "Shared.Identity/1.0.0": {
+      "Shared.Quiz.Identity/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "2.2.0"
         },
         "compile": {
-          "bin/placeholder/Shared.Identity.dll": {}
+          "bin/placeholder/Shared.Quiz.Identity.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Shared.Identity.dll": {}
+          "bin/placeholder/Shared.Quiz.Identity.dll": {}
         }
       },
-      "Shared.Persistence.MySql/1.0.0": {
+      "Shared.Quiz.Persistence.MySql/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "3.1.3",
-          "Shared.Identity": "1.0.0"
+          "Shared.Quiz.Identity": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/Shared.Persistence.MySql.dll": {}
+          "bin/placeholder/Shared.Quiz.Persistence.MySql.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Shared.Persistence.MySql.dll": {}
+          "bin/placeholder/Shared.Quiz.Persistence.MySql.dll": {}
         }
       }
     }
@@ -2098,12 +2098,12 @@
         "version.txt"
       ]
     },
-    "Shared.Identity/1.0.0": {
+    "Shared.Quiz.Identity/1.0.0": {
       "type": "project",
       "path": "../../Shared/Shared.Identity/Shared.Identity.csproj",
       "msbuildProject": "../../Shared/Shared.Identity/Shared.Identity.csproj"
     },
-    "Shared.Persistence.MySql/1.0.0": {
+    "Shared.Quiz.Persistence.MySql/1.0.0": {
       "type": "project",
       "path": "../../Shared/Shared.Persistence.MySql/Shared.Persistence.MySql.csproj",
       "msbuildProject": "../../Shared/Shared.Persistence.MySql/Shared.Persistence.MySql.csproj"
@@ -2112,7 +2112,7 @@
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
       "NETStandard.Library >= 2.0.3",
-      "Shared.Persistence.MySql >= 1.0.0"
+      "Shared.Quiz.Persistence.MySql >= 1.0.0"
     ]
   },
   "packageFolders": {

@@ -18,10 +18,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Shared\Shared.Identity\Shared.Identity.csproj" />
     <ProjectReference Include="..\User.Application\User.Application.csproj" />
     <ProjectReference Include="..\User.Persistence\User.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+    <ProjectReference Include="..\..\Shared\Shared.Identity\Shared.Identity.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(Configuration)' == 'Resease'">
+    <ProjectReference Include="Shared.Quiz.Identity" Version="1.0.0" />
+  </ItemGroup>
 
 </Project>

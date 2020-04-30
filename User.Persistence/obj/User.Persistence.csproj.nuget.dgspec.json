@@ -8,7 +8,7 @@
       "version": "1.0.0",
       "restore": {
         "projectUniqueName": "C:\\andersendev\\Quiz\\Shared\\Shared.Identity\\Shared.Identity.csproj",
-        "projectName": "Shared.Identity",
+        "projectName": "Shared.Quiz.Identity",
         "projectPath": "C:\\andersendev\\Quiz\\Shared\\Shared.Identity\\Shared.Identity.csproj",
         "packagesPath": "C:\\Users\\anduser\\.nuget\\packages\\",
         "outputPath": "C:\\andersendev\\Quiz\\Shared\\Shared.Identity\\obj\\",
@@ -72,7 +72,7 @@
       "version": "1.0.0",
       "restore": {
         "projectUniqueName": "C:\\andersendev\\Quiz\\Shared\\Shared.Persistence.MySql\\Shared.Persistence.MySql.csproj",
-        "projectName": "Shared.Persistence.MySql",
+        "projectName": "Shared.Quiz.Persistence.MySql",
         "projectPath": "C:\\andersendev\\Quiz\\Shared\\Shared.Persistence.MySql\\Shared.Persistence.MySql.csproj",
         "packagesPath": "C:\\Users\\anduser\\.nuget\\packages\\",
         "outputPath": "C:\\andersendev\\Quiz\\Shared\\Shared.Persistence.MySql\\obj\\",
