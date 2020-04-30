@@ -4,14 +4,14 @@
     "C:\\andersendev\\Quiz\\User\\User.Application\\User.Application.csproj": {}
   },
   "projects": {
-    "C:\\andersendev\\Quiz\\Shared\\Shared.Identity\\Shared.Identity.csproj": {
+    "C:\\andersendev\\Quiz\\User\\User.Application\\User.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\andersendev\\Quiz\\Shared\\Shared.Identity\\Shared.Identity.csproj",
-        "projectName": "Shared.Quiz.Identity",
-        "projectPath": "C:\\andersendev\\Quiz\\Shared\\Shared.Identity\\Shared.Identity.csproj",
+        "projectUniqueName": "C:\\andersendev\\Quiz\\User\\User.Application\\User.Application.csproj",
+        "projectName": "User.Application",
+        "projectPath": "C:\\andersendev\\Quiz\\User\\User.Application\\User.Application.csproj",
         "packagesPath": "C:\\Users\\anduser\\.nuget\\packages\\",
-        "outputPath": "C:\\andersendev\\Quiz\\Shared\\Shared.Identity\\obj\\",
+        "outputPath": "C:\\andersendev\\Quiz\\User\\User.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -43,145 +43,6 @@
       "frameworks": {
         "netstandard2.0": {
           "dependencies": {
-            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[2.2.0, )"
-            },
-            "NETStandard.Library": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.0.3, )",
-              "autoReferenced": true
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "C:\\andersendev\\Quiz\\Shared\\Shared.Persistence.MySql\\Shared.Persistence.MySql.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\andersendev\\Quiz\\Shared\\Shared.Persistence.MySql\\Shared.Persistence.MySql.csproj",
-        "projectName": "Shared.Quiz.Persistence.MySql",
-        "projectPath": "C:\\andersendev\\Quiz\\Shared\\Shared.Persistence.MySql\\Shared.Persistence.MySql.csproj",
-        "packagesPath": "C:\\Users\\anduser\\.nuget\\packages\\",
-        "outputPath": "C:\\andersendev\\Quiz\\Shared\\Shared.Persistence.MySql\\obj\\",
-        "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
-        "configFilePaths": [
-          "C:\\Users\\anduser\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "netstandard2.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "netstandard2.0": {
-            "projectReferences": {
-              "C:\\andersendev\\Quiz\\Shared\\Shared.Identity\\Shared.Identity.csproj": {
-                "projectPath": "C:\\andersendev\\Quiz\\Shared\\Shared.Identity\\Shared.Identity.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "netstandard2.0": {
-          "dependencies": {
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[3.1.3, )"
-            },
-            "NETStandard.Library": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.0.3, )",
-              "autoReferenced": true
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "C:\\andersendev\\Quiz\\User\\User.Application\\User.Application.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\andersendev\\Quiz\\User\\User.Application\\User.Application.csproj",
-        "projectName": "User.Application",
-        "projectPath": "C:\\andersendev\\Quiz\\User\\User.Application\\User.Application.csproj",
-        "packagesPath": "C:\\Users\\anduser\\.nuget\\packages\\",
-        "outputPath": "C:\\andersendev\\Quiz\\User\\User.Application\\obj\\",
-        "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
-        "configFilePaths": [
-          "C:\\Users\\anduser\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "netstandard2.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "netstandard2.0": {
-            "projectReferences": {
-              "C:\\andersendev\\Quiz\\Shared\\Shared.Identity\\Shared.Identity.csproj": {
-                "projectPath": "C:\\andersendev\\Quiz\\Shared\\Shared.Identity\\Shared.Identity.csproj"
-              },
-              "C:\\andersendev\\Quiz\\Shared\\Shared.Persistence.MySql\\Shared.Persistence.MySql.csproj": {
-                "projectPath": "C:\\andersendev\\Quiz\\Shared\\Shared.Persistence.MySql\\Shared.Persistence.MySql.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "netstandard2.0": {
-          "dependencies": {
             "AutoMapper": {
               "target": "Package",
               "version": "[9.0.0, )"
@@ -195,6 +56,14 @@
               "target": "Package",
               "version": "[2.0.3, )",
               "autoReferenced": true
+            },
+            "Shared.Quiz.Identity": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+            "Shared.Quiz.Persistence.MySql": {
+              "target": "Package",
+              "version": "[1.0.0, )"
             }
           },
           "imports": [

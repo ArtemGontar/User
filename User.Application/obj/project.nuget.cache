@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "neqvjFA7gqOaTGmJojHaBKt1hTFO8WG6bWUhIsU6+1AZ+oE59ETqIntxyLrGp9cwxI2JVV5ri4Xb4kY5UzYxpA==",
+  "dgSpecHash": "v19Y+WMorOxnjspYUYRmvgPLymMP0hs0Bih1y9zgDNNDLpPohzZLI5D9z+70f309R3uvaR5yqOmZaqTEB+Y5CA==",
   "success": true,
   "projectFilePath": "C:\\andersendev\\Quiz\\User\\User.Application\\User.Application.csproj",
   "expectedPackageFiles": [
@@ -52,6 +52,8 @@
     "C:\\Users\\anduser\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.win32.registry\\4.5.0\\microsoft.win32.registry.4.5.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\anduser\\.nuget\\packages\\shared.quiz.identity\\1.0.0\\shared.quiz.identity.1.0.0.nupkg.sha512",
+    "C:\\Users\\anduser\\.nuget\\packages\\shared.quiz.persistence.mysql\\1.0.0\\shared.quiz.persistence.mysql.1.0.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
     "C:\\Users\\anduser\\.nuget\\packages\\system.collections.immutable\\1.7.0\\system.collections.immutable.1.7.0.nupkg.sha512",
     "C:\\Users\\anduser\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512",

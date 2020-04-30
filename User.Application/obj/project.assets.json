@@ -624,6 +624,31 @@
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       },
+      "Shared.Quiz.Identity/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "2.2.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Shared.Identity.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Shared.Identity.dll": {}
+        }
+      },
+      "Shared.Quiz.Persistence.MySql/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "3.1.3",
+          "Shared.Quiz.Identity": "1.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Shared.Persistence.MySql.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Shared.Persistence.MySql.dll": {}
+        }
+      },
       "System.Buffers/4.5.0": {
         "type": "package",
         "compile": {
@@ -909,33 +934,6 @@
         },
         "runtime": {
           "lib/netstandard2.0/System.Threading.Tasks.Extensions.dll": {}
-        }
-      },
-      "Shared.Quiz.Identity/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "dependencies": {
-          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "2.2.0"
-        },
-        "compile": {
-          "bin/placeholder/Shared.Quiz.Identity.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Shared.Quiz.Identity.dll": {}
-        }
-      },
-      "Shared.Quiz.Persistence.MySql/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore": "3.1.3",
-          "Shared.Quiz.Identity": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/Shared.Quiz.Persistence.MySql.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Shared.Quiz.Persistence.MySql.dll": {}
         }
       }
     }
@@ -1833,6 +1831,30 @@
         "lib/netstandard1.0/_._",
         "netstandard.library.2.0.3.nupkg.sha512",
         "netstandard.library.nuspec"
+      ]
+    },
+    "Shared.Quiz.Identity/1.0.0": {
+      "sha512": "BjprPsVLQliR21rYqXPzQmKBV6FEtcVb82c79Uh6iXD2yvTMl1T05iT5OaIorNzrmd34YBjVwe49vD7GCM1dQQ==",
+      "type": "package",
+      "path": "shared.quiz.identity/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Shared.Identity.dll",
+        "shared.quiz.identity.1.0.0.nupkg.sha512",
+        "shared.quiz.identity.nuspec"
+      ]
+    },
+    "Shared.Quiz.Persistence.MySql/1.0.0": {
+      "sha512": "xgosKpEiDfkHLRZNRhxcveoI3JtqouAm5vCedxDKZgCR8xCU+QsBlTlTtFmLz5Z4TzzJXu2z53/tXmwCFT84WQ==",
+      "type": "package",
+      "path": "shared.quiz.persistence.mysql/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Shared.Persistence.MySql.dll",
+        "shared.quiz.persistence.mysql.1.0.0.nupkg.sha512",
+        "shared.quiz.persistence.mysql.nuspec"
       ]
     },
     "System.Buffers/4.5.0": {
@@ -2878,16 +2900,6 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
-    },
-    "Shared.Quiz.Identity/1.0.0": {
-      "type": "project",
-      "path": "../../Shared/Shared.Identity/Shared.Identity.csproj",
-      "msbuildProject": "../../Shared/Shared.Identity/Shared.Identity.csproj"
-    },
-    "Shared.Quiz.Persistence.MySql/1.0.0": {
-      "type": "project",
-      "path": "../../Shared/Shared.Persistence.MySql/Shared.Persistence.MySql.csproj",
-      "msbuildProject": "../../Shared/Shared.Persistence.MySql/Shared.Persistence.MySql.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -2931,14 +2943,7 @@
       },
       "frameworks": {
         "netstandard2.0": {
-          "projectReferences": {
-            "C:\\andersendev\\Quiz\\Shared\\Shared.Identity\\Shared.Identity.csproj": {
-              "projectPath": "C:\\andersendev\\Quiz\\Shared\\Shared.Identity\\Shared.Identity.csproj"
-            },
-            "C:\\andersendev\\Quiz\\Shared\\Shared.Persistence.MySql\\Shared.Persistence.MySql.csproj": {
-              "projectPath": "C:\\andersendev\\Quiz\\Shared\\Shared.Persistence.MySql\\Shared.Persistence.MySql.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
@@ -2963,6 +2968,14 @@
             "target": "Package",
             "version": "[2.0.3, )",
             "autoReferenced": true
+          },
+          "Shared.Quiz.Identity": {
+            "target": "Package",
+            "version": "[1.0.0, )"
+          },
+          "Shared.Quiz.Persistence.MySql": {
+            "target": "Package",
+            "version": "[1.0.0, )"
           }
         },
         "imports": [
