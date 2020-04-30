@@ -1,13 +1,16 @@
 using System;
 using AutoMapper;
 using GreenPipes;
+using HealthChecks.UI.Client;
 using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Shared.Identity;
@@ -65,6 +68,10 @@ namespace User.Api
             });
             services.AddMassTransitHostedService();
 
+            services.AddHealthChecks()
+                .AddCheck("self", () => HealthCheckResult.Healthy())
+                .AddMySql(connectionString, name: "DB");
+
             var identityUrl = Configuration["IdentityUrl"];
 
             services.AddSwaggerGen(c =>
@@ -104,7 +111,34 @@ namespace User.Api
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapDefaultControllerRoute();
+
+                endpoints.MapHealthChecks("/hc", new HealthCheckOptions
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
+
+                endpoints.MapHealthChecks("/liveness", new HealthCheckOptions
+                {
+                    Predicate = r => r.Name.Contains("self")
+                });
+
+                endpoints.MapHealthChecks("/readiness", new HealthCheckOptions
+                {
+                    Predicate = r => !r.Name.Contains("self")
+                });
+
+                endpoints.MapHealthChecks("/health/ready", new HealthCheckOptions()
+                {
+                    Predicate = (check) => check.Tags.Contains("ready"),
+                });
+
+                endpoints.MapHealthChecks("/health/live", new HealthCheckOptions()
+                {
+                    // Exclude all checks and return a 200-Ok.
+                    Predicate = (_) => false
+                });
             });
         }
     }
