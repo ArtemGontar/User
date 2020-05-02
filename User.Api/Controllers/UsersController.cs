@@ -1,12 +1,17 @@
-﻿using MediatR;
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Threading.Tasks;
+using Shared.Identity;
+using Swashbuckle.AspNetCore.Annotations;
 using User.Application.GetAllUsers;
 using User.Application.GetUserById;
+using User.Application.Update;
 
-namespace User.Controllers
+namespace User.Api.Controllers
 {
     [ApiController]
     [Route("api/users")]
@@ -25,8 +30,8 @@ namespace User.Controllers
         }
 
         [HttpGet]
-        //[SwaggerOperation("Get all Users.")]
-        //[SwaggerResponse((int)HttpStatusCode.OK, "Success.", typeof(IEnumerable<ApplicationUser>))]
+        [SwaggerOperation("Get all Users.")]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Success.", typeof(IEnumerable<ApplicationUser>))]
         public async Task<IActionResult> Get()
         {
             var users = await _mediator.Send(new GetAllUsersQuery());
@@ -36,9 +41,9 @@ namespace User.Controllers
 
         [HttpGet]
         [Route("{userId:guid}")]
-        //[SwaggerOperation("Get User by ID.")]
-        //[SwaggerResponse((int)HttpStatusCode.OK, "Success.", typeof(ApplicationUser))]
-        //[SwaggerResponse((int)HttpStatusCode.NotFound, "User was not found.")]
+        [SwaggerOperation("Get User by ID.")]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Success.", typeof(ApplicationUser))]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, "User was not found.")]
         public async Task<IActionResult> GetByUserId([FromRoute] Guid userId)
         {
             var user = await _mediator.Send(new GetUserByIdQuery
@@ -52,6 +57,18 @@ namespace User.Controllers
             }
 
             return Ok(user);
+        }
+
+        [HttpPut]
+        //[SwaggerOperation("Endpoint to User self update.", "Authorized User has access.")]
+        //[SwaggerResponse((int)HttpStatusCode.OK, "Success.", typeof(Guid))]
+        //[SwaggerResponse((int)HttpStatusCode.BadRequest, "Invalid User model.")]
+        //[SwaggerResponse((int)HttpStatusCode.InternalServerError, "Internal server error.")]
+        public async Task<IActionResult> Update([FromRoute] Guid userId, [FromBody] UpdateUserCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
         }
     }
 }

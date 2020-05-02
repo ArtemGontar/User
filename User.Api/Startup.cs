@@ -7,6 +7,7 @@ using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,6 +43,11 @@ namespace User.Api
                         errorNumbersToAdd: null);
                 }));
             services.AddScoped<ISqlRepository<ApplicationUser>, UserRepository>();
+
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+                .AddUserManager<UserManager<ApplicationUser>>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
 
             services.AddAutoMapper(typeof(UserProfile).Assembly);
             services.AddMediatR(typeof(GetAllUsersQuery).Assembly);
@@ -83,8 +89,9 @@ namespace User.Api
                 });
             });
 
+            services.AddCors();
 
-            services.AddControllers();
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -95,7 +102,11 @@ namespace User.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
+
+            app.UseCors(builder =>
+                builder.WithOrigins("http://localhost:4200").AllowAnyHeader());
+
 
             app.UseRouting();
 

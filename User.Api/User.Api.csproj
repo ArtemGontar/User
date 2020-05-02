@@ -13,7 +13,6 @@
     <PackageReference Include="MassTransit.AspNetCore" Version="6.2.5" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="6.2.5" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.3.3" />
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="5.1.1" />
@@ -21,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\User.Application\User.Application.csproj" />
-    <ProjectReference Include="..\User.Persistence\User.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(Configuration)' == 'Release'">
@@ -9,9 +9,8 @@
     <PackageReference Include="Shared.Quiz.Identity" Version="1.0.0" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+  <ItemGroup>
     <ProjectReference Include="..\..\Shared\Shared.Persistence.MySql\Shared.Persistence.MySql.csproj" />
-    <ProjectReference Include="..\..\Shared\Shared.Identity\Shared.Identity.csproj" />
   </ItemGroup>
 
 </Project>
