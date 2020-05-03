@@ -89,7 +89,10 @@ namespace User.Api
                 });
             });
 
-            services.AddCors();
+            services.AddCors(options =>
+                options.AddPolicy("AllowAll", p => p.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()));
 
             services.AddControllersWithViews();
         }
@@ -104,9 +107,7 @@ namespace User.Api
 
             //app.UseHttpsRedirection();
 
-            app.UseCors(builder =>
-                builder.WithOrigins("http://localhost:4200").AllowAnyHeader());
-
+            app.UseCors("AllowAll");
 
             app.UseRouting();
 
