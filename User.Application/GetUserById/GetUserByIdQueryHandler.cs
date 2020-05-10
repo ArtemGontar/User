@@ -1,6 +1,8 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 using Shared.Identity;
-using Shared.Persistence.MySql;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,14 +11,26 @@ namespace User.Application.GetUserById
 {
     public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, ApplicationUser>
     {
-        private readonly ISqlRepository<ApplicationUser> _userRepository;
-        public GetUserByIdQueryHandler(ISqlRepository<ApplicationUser> userRepository)
+        private readonly ILogger<GetUserByIdQueryHandler> _logger;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IMapper _mapper;
+        public GetUserByIdQueryHandler(ILogger<GetUserByIdQueryHandler> logger, 
+            UserManager<ApplicationUser> userManager)
         {
-            _userRepository = userRepository;
+            _logger = logger;
+            _userManager = userManager;
         }
-        public Task<ApplicationUser> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
+        public async Task<ApplicationUser> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var user = await _userManager.FindByIdAsync(request.UserId.ToString());
+
+            if (user == null)
+            {
+                _logger.LogError($"User with id {request.UserId} was not found");
+                throw new InvalidOperationException($"User with id {request.UserId} was not found");
+            }
+
+            return user;
         }
     }
 }

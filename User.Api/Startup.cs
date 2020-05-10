@@ -1,13 +1,17 @@
 using System;
 using AutoMapper;
 using GreenPipes;
+using HealthChecks.UI.Client;
 using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Shared.Identity;
@@ -40,6 +44,11 @@ namespace User.Api
                 }));
             services.AddScoped<ISqlRepository<ApplicationUser>, UserRepository>();
 
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+                .AddUserManager<UserManager<ApplicationUser>>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
             services.AddAutoMapper(typeof(UserProfile).Assembly);
             services.AddMediatR(typeof(GetAllUsersQuery).Assembly);
 
@@ -65,6 +74,10 @@ namespace User.Api
             });
             services.AddMassTransitHostedService();
 
+            services.AddHealthChecks()
+                .AddCheck("self", () => HealthCheckResult.Healthy())
+                .AddMySql(connectionString, name: "DB");
+
             var identityUrl = Configuration["IdentityUrl"];
 
             services.AddSwaggerGen(c =>
@@ -76,8 +89,12 @@ namespace User.Api
                 });
             });
 
+            services.AddCors(options =>
+                options.AddPolicy("AllowAll", p => p.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()));
 
-            services.AddControllers();
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -88,7 +105,9 @@ namespace User.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
+
+            app.UseCors("AllowAll");
 
             app.UseRouting();
 
@@ -104,7 +123,34 @@ namespace User.Api
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapDefaultControllerRoute();
+
+                endpoints.MapHealthChecks("/hc", new HealthCheckOptions
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
+
+                endpoints.MapHealthChecks("/liveness", new HealthCheckOptions
+                {
+                    Predicate = r => r.Name.Contains("self")
+                });
+
+                endpoints.MapHealthChecks("/readiness", new HealthCheckOptions
+                {
+                    Predicate = r => !r.Name.Contains("self")
+                });
+
+                endpoints.MapHealthChecks("/health/ready", new HealthCheckOptions()
+                {
+                    Predicate = (check) => check.Tags.Contains("ready"),
+                });
+
+                endpoints.MapHealthChecks("/health/live", new HealthCheckOptions()
+                {
+                    // Exclude all checks and return a 200-Ok.
+                    Predicate = (_) => false
+                });
             });
         }
     }

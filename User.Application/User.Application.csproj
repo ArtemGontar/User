@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,8 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Shared\Shared.Identity\Shared.Identity.csproj" />
-    <ProjectReference Include="..\..\Shared\Shared.Persistence.MySql\Shared.Persistence.MySql.csproj" />
+    <ProjectReference Include="..\User.Persistence\User.Persistence.csproj" />
   </ItemGroup>
-
 </Project>
