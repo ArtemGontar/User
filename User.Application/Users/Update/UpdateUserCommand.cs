@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MediatR;
+﻿using MediatR;
 using Shared.Common;
+using System;
 
 namespace User.Application.Update
 {
@@ -23,5 +21,7 @@ namespace User.Application.Update
         public string JobTitle { get; set; }
 
         public string PhoneNumber { get; set; }
+
+        public string SystemRole { get; set; }
     }
 }

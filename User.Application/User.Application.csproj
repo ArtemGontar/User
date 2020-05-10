@@ -9,13 +9,6 @@
     <PackageReference Include="MediatR" Version="8.0.1" />
   </ItemGroup>
 
-
-  <ItemGroup Condition="'$(Configuration)' == 'Release'">
-    <PackageReference Include="Shared.Quiz.Persistence.MySql" Version="1.0.0" />
-    <PackageReference Include="Shared.Quiz.Identity" Version="1.0.0" />
-  </ItemGroup>
-
-
   <ItemGroup>
     <ProjectReference Include="..\User.Persistence\User.Persistence.csproj" />
   </ItemGroup>
