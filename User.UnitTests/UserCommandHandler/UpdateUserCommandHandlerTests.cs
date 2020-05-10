@@ -6,6 +6,7 @@ using Moq.AutoMock;
 using Shared.Common;
 using Shared.Identity;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using User.Application.Infrastructure;
@@ -42,6 +43,7 @@ namespace User.UnitTests.UserCommandHandler
             var command = new UpdateUserCommand() 
             {
                 UserId = userId,
+                SystemRole = "Client",
                 FirstName = "anonymousFirstName",
                 LastName = "anonymousLastName",
                 EnglishLevel = EnglishLevel.Beginner,
@@ -54,7 +56,8 @@ namespace User.UnitTests.UserCommandHandler
             _userManagerMock.Setup(x => x.FindByIdAsync(It.IsAny<string>()))
                 .ReturnsAsync(new ApplicationUser() 
                 {
-                    Id = Guid.NewGuid(),
+                    Id = userId,
+                    Email = "anonymousEmail@test.com",
                     FirstName = "anonymousFirstName",
                     LastName = "anonymousLastName",
                     EnglishLevel = EnglishLevel.Beginner,
@@ -66,6 +69,14 @@ namespace User.UnitTests.UserCommandHandler
             _userManagerMock.Setup(x => x.UpdateAsync(It.IsAny<ApplicationUser>()))
                 .ReturnsAsync(IdentityResult.Success);
 
+            _userManagerMock.Setup(x => x.GetRolesAsync(It.IsAny<ApplicationUser>()))
+                .ReturnsAsync(new List<string>());
+
+            _userManagerMock.Setup(x => x.RemoveFromRolesAsync(It.IsAny<ApplicationUser>(), It.IsAny<IEnumerable<string>>()))
+                .ReturnsAsync(IdentityResult.Success);
+
+            _userManagerMock.Setup(x => x.AddToRoleAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>()))
+                .ReturnsAsync(IdentityResult.Success);
             //Act
             var result = await _userCommandHandler.Handle(command, CancellationToken.None);
             

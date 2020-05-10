@@ -15,10 +15,11 @@ namespace User.Application.Update
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMapper _mapper;
         public UpdateUserCommandHandler(ILogger<UpdateUserCommandHandler> logger,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager, IMapper mapper)
         {
             _logger = logger;
             _userManager = userManager;
+            _mapper = mapper;
         }
 
         public async Task<Guid> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
