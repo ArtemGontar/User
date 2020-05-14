@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Shared.Identity;
@@ -13,6 +14,7 @@ using User.Application.Update;
 
 namespace User.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/users")]
     public class UsersController : ControllerBase
@@ -61,10 +63,10 @@ namespace User.Api.Controllers
 
         [HttpPut]
         [Route("{userId:guid}")]
-        //[SwaggerOperation("Endpoint to User self update.", "Authorized User has access.")]
-        //[SwaggerResponse((int)HttpStatusCode.OK, "Success.", typeof(Guid))]
-        //[SwaggerResponse((int)HttpStatusCode.BadRequest, "Invalid User model.")]
-        //[SwaggerResponse((int)HttpStatusCode.InternalServerError, "Internal server error.")]
+        [SwaggerOperation("Endpoint to User self update.", "Authorized User has access.")]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Success.", typeof(Guid))]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest, "Invalid User model.")]
+        [SwaggerResponse((int)HttpStatusCode.InternalServerError, "Internal server error.")]
         public async Task<IActionResult> Update([FromRoute] Guid userId, [FromBody] UpdateUserCommand command)
         {
             command.UserId = userId;
