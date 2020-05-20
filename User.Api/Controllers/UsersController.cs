@@ -11,6 +11,7 @@ using Swashbuckle.AspNetCore.Annotations;
 using User.Application.GetAllUsers;
 using User.Application.GetUserById;
 using User.Application.Update;
+using User.Application.Users.Disable;
 
 namespace User.Api.Controllers
 {
@@ -71,6 +72,18 @@ namespace User.Api.Controllers
         {
             command.UserId = userId;
             var result = await _mediator.Send(command);
+
+            return Ok(result);
+        }
+
+        [HttpPost]
+        [Route("{userId:guid}/disable")]
+        [SwaggerOperation("Endpoint to Disable user by Admin", "Authorized User has access.")]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Success.", typeof(Guid))]
+        [SwaggerResponse((int)HttpStatusCode.InternalServerError, "Internal server error.")]
+        public async Task<IActionResult> Disable([FromRoute] Guid userId)
+        {
+            var result = await _mediator.Send(new DisableUserCommand { UserId = userId });
 
             return Ok(result);
         }
