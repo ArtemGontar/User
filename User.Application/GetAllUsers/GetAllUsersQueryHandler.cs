@@ -14,7 +14,6 @@ namespace User.Application.GetAllUsers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMapper _mapper;
 
-
         public GetAllUsersQueryHandler(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
