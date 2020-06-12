@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using OpenTracing;
 using Shared.Identity;
 using Swashbuckle.AspNetCore.Annotations;
 using User.Application.GetAllUsers;
@@ -23,13 +24,15 @@ namespace User.Api.Controllers
 
         private readonly ILogger<UsersController> _logger;
         private readonly IMediator _mediator;
-
+        private readonly ITracer _tracer;
 
         public UsersController(ILogger<UsersController> logger, 
-            IMediator mediator)
+            IMediator mediator,
+            ITracer tracer)
         {
             _logger = logger;
             _mediator = mediator;
+            _tracer = tracer;
         }
 
         [HttpGet]
@@ -37,9 +40,12 @@ namespace User.Api.Controllers
         [SwaggerResponse((int)HttpStatusCode.OK, "Success.", typeof(IEnumerable<ApplicationUser>))]
         public async Task<IActionResult> Get()
         {
-            var users = await _mediator.Send(new GetAllUsersQuery());
+            using (var scope = _tracer.BuildSpan("GetUsers").StartActive(finishSpanOnDispose: true))
+            {
+                var users = await _mediator.Send(new GetAllUsersQuery());
 
-            return Ok(users);
+                return Ok(users);
+            }
         }
 
         [HttpGet]
@@ -49,17 +55,20 @@ namespace User.Api.Controllers
         [SwaggerResponse((int)HttpStatusCode.NotFound, "User was not found.")]
         public async Task<IActionResult> GetByUserId([FromRoute] Guid userId)
         {
-            var user = await _mediator.Send(new GetUserByIdQuery
+            using (var scope = _tracer.BuildSpan("GetUserById").StartActive(finishSpanOnDispose: true))
             {
-                UserId = userId
-            });
+                var user = await _mediator.Send(new GetUserByIdQuery
+                {
+                    UserId = userId
+                });
 
-            if (user == null)
-            {
-                return NotFound($"User with ID '{userId}' was not found.");
+                if (user == null)
+                {
+                    return NotFound($"User with ID '{userId}' was not found.");
+                }
+
+                return Ok(user);
             }
-
-            return Ok(user);
         }
 
         [HttpPut]
@@ -70,10 +79,13 @@ namespace User.Api.Controllers
         [SwaggerResponse((int)HttpStatusCode.InternalServerError, "Internal server error.")]
         public async Task<IActionResult> Update([FromRoute] Guid userId, [FromBody] UpdateUserCommand command)
         {
-            command.UserId = userId;
-            var result = await _mediator.Send(command);
+            using (var scope = _tracer.BuildSpan("UpdateUser").StartActive(finishSpanOnDispose: true))
+            {
+                command.UserId = userId;
+                var result = await _mediator.Send(command);
 
-            return Ok(result);
+                return Ok(result);
+            }
         }
 
         [HttpPost]

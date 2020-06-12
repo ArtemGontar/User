@@ -2,6 +2,8 @@ using System;
 using AutoMapper;
 using GreenPipes;
 using HealthChecks.UI.Client;
+using Jaeger;
+using Jaeger.Samplers;
 using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -15,6 +17,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using OpenTracing;
+using OpenTracing.Util;
 using Shared.Identity;
 using Shared.Persistence.MySql;
 using User.Application.GetAllUsers;
@@ -54,6 +58,23 @@ namespace User.Api
             services.AddMediatR(typeof(GetAllUsersQuery).Assembly);
 
             AppMassTransit(services);
+
+            services.AddOpenTracing();
+
+            services.AddSingleton<ITracer>(serviceProvider =>
+            {
+                string serviceName = serviceProvider.GetRequiredService<IWebHostEnvironment>().ApplicationName;
+
+                // This will log to a default localhost installation of Jaeger.
+                var tracer = new Tracer.Builder(serviceName)
+                    .WithSampler(new ConstSampler(true))
+                    .Build();
+
+                // Allows code that can't use DI to also access the tracer.
+                GlobalTracer.Register(tracer);
+
+                return tracer;
+            });
 
             services.AddHealthChecks()
                 .AddCheck("self", () => HealthCheckResult.Healthy())
