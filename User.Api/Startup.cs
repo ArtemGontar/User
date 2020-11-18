@@ -57,7 +57,7 @@ namespace User.Api
             services.AddAutoMapper(typeof(UserProfile).Assembly);
             services.AddMediatR(typeof(GetAllUsersQuery).Assembly);
 
-            AppMassTransit(services);
+            AddMassTransit(services);
 
             services.AddOpenTracing();
 
@@ -163,25 +163,24 @@ namespace User.Api
             services.AddAuthorization();
         }
 
-        protected virtual void AppMassTransit(IServiceCollection services)
+        protected virtual void AddMassTransit(IServiceCollection services)
         {
+            var rabbitMqHost = Configuration["RabbitMqHost"];
+
             services.AddMassTransit(x =>
             {
-                //x.AddConsumer<DeleteChapterConsumer>();
 
-                x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
+                x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq((cfg) =>
                 {
                     // configure health checks for this bus instance
                     cfg.UseHealthCheck(provider);
 
-                    cfg.Host("rabbitmq://localhost");
+                    cfg.Host(rabbitMqHost);
 
                     cfg.ReceiveEndpoint("delete-chapter", ep =>
                     {
                         ep.PrefetchCount = 16;
                         ep.UseMessageRetry(r => r.Interval(2, 100));
-
-                        //ep.ConfigureConsumer<DeleteChapterConsumer>(provider);
                     });
                 }));
             });
