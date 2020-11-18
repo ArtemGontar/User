@@ -1,23 +1,27 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Shared.Identity;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Shared.Persistence.MySql;
 
 namespace User.Application.GetAllUsers
 {
     public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, IEnumerable<ApplicationUser>>
     {
-        private readonly ISqlRepository<ApplicationUser> _userRepository;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IMapper _mapper;
 
-        public GetAllUsersQueryHandler(ISqlRepository<ApplicationUser> userRepository)
+        public GetAllUsersQueryHandler(UserManager<ApplicationUser> userManager)
         {
-            _userRepository = userRepository;
+            _userManager = userManager;
         }
-        public Task<IEnumerable<ApplicationUser>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ApplicationUser>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            var users = await _userManager.Users.AsNoTracking().ToListAsync(cancellationToken);
+            return users;
         }
     }
 }
